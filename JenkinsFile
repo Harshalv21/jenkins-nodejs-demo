@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+      stage ('Build') {
+        steps {
+          echo 'building Docker Image...'
+          sh 'docker build -t jenkins-nodejs-demo .'
+        }
+      }
+      stage ('Test') {
+        steps {
+          echo 'Testig... (this is a dummy test)'
+          sh 'echo "Test Passed!"'
+        }
+      }
+      stage ('Deploy') {
+        steps {
+          echo 'Running Container...'
+          sh 'docker run -d -p 3000:3000 jenkins-nodejs-demo'
+        }
+      }
+    }
+}
