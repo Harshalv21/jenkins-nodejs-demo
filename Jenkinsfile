@@ -28,4 +28,3 @@ pipeline {
         }
     }
 }
-// # testing for auto trigerring // test trigger

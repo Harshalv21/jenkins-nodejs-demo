@@ -1,0 +1,105 @@
+# Node.js CI/CD Pipeline with Jenkins
+
+This project demonstrates a basic CI/CD pipeline using **Jenkins** to build, test, and deploy a simple Node.js application. The pipeline is triggered automatically on every code push using GitHub webhooks.
+
+---
+
+## 🔧 Tech Stack
+
+- **Node.js**
+- **Jenkins**
+- **GitHub**
+- **Docker** (optional)
+- **Ubuntu VM** (self-hosted Jenkins)
+- **Ngrok** (for webhook exposure)
+
+---
+
+## 📁 Project Structure
+
+jenkins-nodejs-demo/
+│
+├── Jenkinsfile # Pipeline definition
+├── server.js # Simple Node.js app
+├── package.json # Node.js metadata
+└── README.md # Project documentation
+
+
+---
+
+## 🚀 Pipeline Stages
+
+### ✅ Build
+- Installs dependencies using `npm install`
+
+### ✅ Test
+- Runs basic or placeholder test (`echo "Running tests..."`)
+
+### ✅ Deploy
+- Starts the app using `node server.js` or runs it via Docker (optional)
+
+---
+
+## 📦 Jenkinsfile
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Installing dependencies...'
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'echo "Tests passed!"'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                sh 'nohup node server.js &'
+            }
+        }
+    }
+}
+🔁 Auto Trigger Setup
+The pipeline automatically runs when you push code to GitHub using a webhook.
+
+GitHub Webhook Configuration:
+Start Jenkins on your VM at http://localhost:8080
+
+Expose Jenkins to the internet using Ngrok:
+
+ngrok http 8080
+Copy the forwarding URL (e.g., https://abc123.ngrok.io)
+
+Go to your GitHub repo → Settings → Webhooks → Add webhook
+
+Payload URL: https://<ngrok-url>/github-webhook/
+
+Content type: application/json
+
+Events: Just the push event
+
+Save webhook. It should now trigger Jenkins on each commit.
+
+🧪 How to Test the Pipeline
+Make changes in any file (e.g., server.js)
+
+Commit and push to GitHub:
+
+git add .
+git commit -m "Test pipeline trigger"
+git push
+Check the Jenkins dashboard for auto-triggered build status.
+
+👨‍💻 Author
+Harshal Vernekar
+DevOps Enthusiast | GitHub: @Harshalv21
