@@ -1,0 +1,11 @@
+{
+  "name": "jenkins-nodejs-demo",
+  "version": "1.0.0",
+  "description": "A basic Node.js app using http module for Jenkins CI/CD pipeline",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Harshal",
+  "license": "ISC"
+}
